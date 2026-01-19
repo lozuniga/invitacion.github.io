@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="es" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cumpleaños de Camila 🍒</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    .font-playfair {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .font-quicksand {
+      font-family: 'Quicksand', sans-serif;
+    }
+    
+    .envelope {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      animation: envelopePulse 2s ease-in-out infinite;
+    }
+    
+    .envelope:hover {
+      transform: scale(1.08);
+      animation: none;
+    }
+    
+    @keyframes envelopePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    
+    .envelope-flap {
+      transform-origin: top center;
+      transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
+    .envelope.opened .envelope-flap {
+      transform: rotateX(180deg);
+    }
+    
+    .envelope.opened {
+      animation: none;
+    }
+    
+    .cherry {
+      position: absolute;
+      pointer-events: none;
+      z-index: 100;
+    }
+    
+    .cherry-float {
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+    
+    @keyframes explode {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0.6) rotate(var(--rotation));
+      }
+    }
+    
+    .cherry-exploding {
+      animation: explode var(--explode-duration) ease-out forwards;
+    }
+    
+    .section-cherry {
+      position: absolute;
+      opacity: 0.6;
+    }
+    
+    .decorative-line {
+      background: linear-gradient(90deg, transparent, #c2185b, transparent);
+      height: 2px;
+    }
+    
+    .gold-accent {
+      color: #d4af37;
+    }
+    
+    .btn-cherry {
+      background: linear-gradient(135deg, #c2185b 0%, #e91e63 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-cherry:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(194, 24, 91, 0.4);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-quicksand">
+  <div id="app-wrapper" class="w-full h-full overflow-auto"><!-- Sección 1: El Sobre Interactivo -->
+   <section id="section-envelope" class="relative w-full min-h-full flex flex-col items-center justify-center" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);">
+    <div class="text-center mb-8 z-10">
+     <h2 class="font-playfair text-4xl md:text-5xl font-bold text-pink-600 mb-4 text-shadow">Tienes una invitación especial</h2>
+     <p class="text-xl text-pink-700 font-medium">Toca el sobre para abrirlo 💌</p>
+    </div>
+    <div id="envelope-container" class="envelope relative" onclick="openEnvelope()"><!-- Sobre -->
+     <svg width="300" height="220" viewbox="0 0 300 220" class="drop-shadow-2xl"><!-- Cuerpo del sobre - Turquesa elegante --> <rect x="15" y="60" width="270" height="145" rx="10" fill="#00897b" stroke="#26a69a" stroke-width="3" /> <!-- Patrón decorativo interior --> <rect x="30" y="75" width="240" height="115" rx="6" fill="none" stroke="#80cbc4" stroke-width="2" stroke-dasharray="8,4" /> <!-- Detalles dorados en las esquinas --> <circle cx="35" cy="80" r="4" fill="#ffd54f" opacity="0.8" /> <circle cx="265" cy="80" r="4" fill="#ffd54f" opacity="0.8" /> <circle cx="35" cy="185" r="4" fill="#ffd54f" opacity="0.8" /> <circle cx="265" cy="185" r="4" fill="#ffd54f" opacity="0.8" /> <!-- Solapa trasera --> <path d="M15 60 L150 140 L285 60" fill="#00695c" stroke="#26a69a" stroke-width="3" /> <!-- Líneas decorativas en la solapa trasera --> <path d="M50 70 L150 135" stroke="#80cbc4" stroke-width="1.5" opacity="0.6" /> <path d="M250 70 L150 135" stroke="#80cbc4" stroke-width="1.5" opacity="0.6" /> <!-- Solapa frontal (se abre) --> <g class="envelope-flap">
+       <path d="M15 60 L150 145 L285 60 L150 5 Z" fill="#00897b" stroke="#26a69a" stroke-width="3" /> <!-- Sello circular dorado -->
+       <circle cx="150" cy="55" r="25" fill="#ffd54f" />
+       <circle cx="150" cy="55" r="20" fill="none" stroke="#00897b" stroke-width="2" />
+       <text x="150" y="63" text-anchor="middle" fill="#00897b" font-size="24" font-weight="bold">
+        🍒
+       </text>
+      </g> <!-- Sello postal decorativo --> <rect x="230" y="145" width="40" height="45" rx="3" fill="#ffd54f" opacity="0.3" stroke="#ffd54f" stroke-width="1.5" /> <text x="250" y="172" text-anchor="middle" fill="#00897b" font-size="18" font-weight="bold">
+       8
+      </text>
+     </svg>
+    </div><!-- Contenedor para cerezas flotantes -->
+    <div id="cherry-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+   </section><!-- Sección 2: Portada de Bienvenida -->
+   <section id="section-welcome" class="relative w-full min-h-full flex flex-col items-center justify-center py-16 px-6" style="background: linear-gradient(180deg, #fce4ec 0%, #fff 50%, #fce4ec 100%);"><!-- Cerezas decorativas -->
+    <div class="section-cherry" style="top: 10%; left: 5%; font-size: 3rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="top: 15%; right: 8%; font-size: 2rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="bottom: 20%; left: 10%; font-size: 2.5rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="bottom: 15%; right: 5%; font-size: 2rem;">
+     🍒
+    </div>
+    <div class="text-center z-10">
+     <p class="text-pink-400 text-xl mb-4">🎀</p>
+     <h1 id="title-name" class="font-playfair text-5xl md:text-7xl font-bold text-pink-600 text-shadow mb-6">¡Cumpleaños de Camila!</h1>
+     <div class="flex items-center justify-center gap-4 mb-6">
+      <div class="decorative-line w-16 md:w-24"></div><span class="text-3xl">🍒</span>
+      <p id="title-age" class="font-playfair text-4xl md:text-5xl font-semibold text-pink-500">8 años</p><span class="text-3xl">🍒</span>
+      <div class="decorative-line w-16 md:w-24"></div>
+     </div>
+     <p class="text-2xl md:text-3xl text-pink-400 font-medium mt-8">✨ Estás invitada/o ✨</p><button onclick="document.getElementById('section-details').scrollIntoView({behavior: 'smooth'})" class="mt-10 px-8 py-3 rounded-full font-semibold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" style="background: linear-gradient(135deg, #DC2626, #BE185D);"> Ver detalles 🍒 </button> <!-- Flecha animada hacia abajo -->
+     <div class="mt-8 animate-bounce">
+      <svg width="40" height="40" viewbox="0 0 24 24" fill="none" class="mx-auto"><path d="M12 5v14m0 0l-7-7m7 7l7-7" stroke="#c2185b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+     </div>
+    </div>
+   </section><!-- Sección 3: Detalles del Evento -->
+   <section id="section-details" class="relative w-full min-h-full flex flex-col items-center justify-center py-16 px-6" style="background: linear-gradient(135deg, #fff5f8 0%, #fce4ec 100%);"><!-- Cerezas decorativas -->
+    <div class="section-cherry" style="top: 8%; left: 15%; font-size: 2rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="top: 12%; right: 12%; font-size: 2.5rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="bottom: 10%; left: 8%; font-size: 2rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="bottom: 18%; right: 15%; font-size: 1.8rem;">
+     🍒
+    </div>
+    <div class="text-center z-10 max-w-lg">
+     <h2 class="font-playfair text-4xl md:text-5xl font-bold text-pink-600 mb-12">Detalles del Evento</h2>
+     <div class="space-y-8"><!-- Fecha -->
+      <div class="bg-white/80 backdrop-blur rounded-2xl p-6 shadow-lg border border-pink-200">
+       <p class="text-pink-400 text-2xl mb-2">📅</p>
+       <p class="text-gray-500 text-sm uppercase tracking-wider mb-1">Fecha</p>
+       <p id="detail-date" class="font-playfair text-2xl text-pink-700 font-semibold">Sábado 7 de Febrero</p>
+      </div><!-- Hora -->
+      <div class="bg-white/80 backdrop-blur rounded-2xl p-6 shadow-lg border border-pink-200">
+       <p class="text-pink-400 text-2xl mb-2">🕑</p>
+       <p class="text-gray-500 text-sm uppercase tracking-wider mb-1">Hora</p>
+       <p id="detail-time" class="font-playfair text-2xl text-pink-700 font-semibold">2:30 PM</p>
+      </div><!-- Lugar -->
+      <div class="bg-white/80 backdrop-blur rounded-2xl p-6 shadow-lg border border-pink-200">
+       <p class="text-pink-400 text-2xl mb-2">📍</p>
+       <p class="text-gray-500 text-sm uppercase tracking-wider mb-1">Lugar</p>
+       <p id="detail-location" class="font-playfair text-xl text-pink-700 font-semibold">Colinas de Sacoj, 6ta Calle 1-17</p>
+      </div>
+     </div><button onclick="document.getElementById('section-rsvp').scrollIntoView({behavior: 'smooth'})" class="mt-10 px-8 py-3 rounded-full font-semibold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" style="background: linear-gradient(135deg, #DC2626, #BE185D);"> Confirma asistencia 💌 </button>
+    </div>
+   </section><!-- Sección 4: Confirmación (RSVP) y Cierre -->
+   <section id="section-rsvp" class="relative w-full min-h-full flex flex-col items-center justify-center py-16 px-6" style="background: linear-gradient(180deg, #fce4ec 0%, #f8bbd9 50%, #fce4ec 100%);"><!-- Cerezas decorativas -->
+    <div class="section-cherry" style="top: 5%; left: 10%; font-size: 2.5rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="top: 10%; right: 8%; font-size: 2rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="bottom: 12%; left: 5%; font-size: 2rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="bottom: 8%; right: 12%; font-size: 2.5rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="top: 40%; left: 3%; font-size: 1.5rem;">
+     🍒
+    </div>
+    <div class="section-cherry" style="top: 50%; right: 5%; font-size: 1.8rem;">
+     🍒
+    </div>
+    <div class="text-center z-10 max-w-lg">
+     <h2 class="font-playfair text-4xl md:text-5xl font-bold text-pink-600 mb-8">Confirmación</h2>
+     <div class="bg-white/90 backdrop-blur rounded-3xl p-8 shadow-xl border border-pink-200 mb-8">
+      <p class="text-gray-700 text-lg leading-relaxed mb-6">Te agradeceríamos mucho tu puntualidad, ya que las actividades tendrán horarios establecidos. ⏰✨</p>
+      <p class="text-pink-600 font-semibold text-lg mb-4">Por favor, confirma tu asistencia. 🙏🏻</p>
+      <div class="bg-pink-50 rounded-xl p-4 mb-6">
+       <p class="text-gray-500 text-sm">Fecha límite para confirmar:</p>
+       <p id="detail-deadline" class="font-playfair text-xl text-pink-700 font-semibold">Lunes 26 de Enero</p>
+      </div><a href="https://forms.gle/AMg5acwaKYAL3scH8" target="_blank" rel="noopener noreferrer" class="btn-cherry inline-block text-white font-semibold py-4 px-10 rounded-full text-lg shadow-lg"> 📝 Confirmar Asistencia </a>
+      <p class="text-pink-600 text-sm mt-4 font-medium">Haz clic en el botón para confirmar tu asistencia. 👆</p>
+     </div>
+     <div class="mt-8">
+      <p class="font-playfair text-2xl md:text-3xl text-pink-700 font-semibold mb-4">¡Te Esperamos!</p>
+      <p class="text-pink-600 text-lg">Será una tarde llena de diversión y sorpresas 🎈🎁</p>
+      <div class="mt-8 flex justify-center gap-2 text-3xl"><span>🍒</span> <span>🎀</span> <span>🍒</span>
+      </div>
+     </div>
+    </div>
+   </section>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      birthday_name: 'Camila',
+      birthday_age: '8 años',
+      event_date: 'Sábado 7 de Febrero',
+      event_time: '2:30 PM',
+      event_location: 'Colinas de Sacoj, 6ta Calle 1-17',
+      confirm_deadline: 'Lunes 26 de Enero',
+      primary_color: '#c2185b',
+      secondary_color: '#fce4ec',
+      text_color: '#1a237e',
+      accent_color: '#d4af37',
+      button_color: '#e91e63'
+    };
+
+    let config = { ...defaultConfig };
+    let envelopeOpened = false;
+
+    // Cherry explosion function
+    function createCherryExplosion() {
+      const container = document.getElementById('cherry-container');
+      const envelopeContainer = document.getElementById('envelope-container');
+      const envelopeRect = envelopeContainer.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      
+      // Centro del sobre (punto de origen de la explosión)
+      const centerX = envelopeRect.left + envelopeRect.width / 2 - containerRect.left;
+      const centerY = envelopeRect.top + envelopeRect.height / 2 - containerRect.top;
+      
+      for (let i = 0; i < 350; i++) {
+        setTimeout(() => {
+          const cherry = document.createElement('div');
+          cherry.className = 'cherry cherry-exploding';
+          cherry.innerHTML = '🍒';
+          
+          // Posicionar en el centro del sobre
+          cherry.style.left = centerX + 'px';
+          cherry.style.top = centerY + 'px';
+          cherry.style.fontSize = (Math.random() * 25 + 12) + 'px';
+          
+          // Dispersión completamente aleatoria en todas direcciones
+          // Usamos valores aleatorios independientes para X y Y en lugar de ángulos
+          const randomXDirection = (Math.random() - 0.5) * 2; // -1 a 1
+          const randomYDirection = (Math.random() - 0.5) * 2; // -1 a 1
+          
+          // Distancia aleatoria más variada
+          const distanceX = randomXDirection * (Math.random() * 900 + 300);
+          const distanceY = randomYDirection * (Math.random() * 900 + 300);
+          
+          // Rotación muy dramática
+          const rotation = (Math.random() - 0.5) * 1440; // -720 a +720 grados
+          
+          // Duración más variada
+          const duration = Math.random() * 1.8 + 1.2;
+          
+          cherry.style.setProperty('--tx', distanceX + 'px');
+          cherry.style.setProperty('--ty', distanceY + 'px');
+          cherry.style.setProperty('--rotation', rotation + 'deg');
+          cherry.style.setProperty('--explode-duration', duration + 's');
+          
+          container.appendChild(cherry);
+          
+          // Remover después de la animación
+          setTimeout(() => {
+            cherry.remove();
+          }, duration * 1000 + 500);
+        }, i * 6);
+      }
+    }
+
+    // Envelope open function
+    function openEnvelope() {
+      if (envelopeOpened) return;
+      
+      envelopeOpened = true;
+      const envelope = document.getElementById('envelope-container');
+      envelope.classList.add('opened');
+      
+      // Trigger cherry explosion
+      setTimeout(() => {
+        createCherryExplosion();
+      }, 400);
+      
+      // Scroll to next section after animation
+      setTimeout(() => {
+        document.getElementById('section-welcome').scrollIntoView({ behavior: 'smooth' });
+      }, 3000);
+    }
+
+    // Update UI based on config
+    async function onConfigChange(newConfig) {
+      config = { ...defaultConfig, ...newConfig };
+      
+      // Update text content
+      document.getElementById('title-name').textContent = `¡Cumpleaños de ${config.birthday_name}!`;
+      document.getElementById('title-age').textContent = config.birthday_age;
+      document.getElementById('detail-date').textContent = config.event_date;
+      document.getElementById('detail-time').textContent = config.event_time;
+      document.getElementById('detail-location').textContent = config.event_location;
+      document.getElementById('detail-deadline').textContent = config.confirm_deadline;
+    }
+
+    // Map config to capabilities
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ secondary_color: value });
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ accent_color: value });
+            }
+          },
+          {
+            get: () => config.button_color || defaultConfig.button_color,
+            set: (value) => {
+              config.button_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ button_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || 'Playfair Display',
+          set: (value) => {
+            config.font_family = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || 16,
+          set: (value) => {
+            config.font_size = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    // Map config to edit panel values
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['birthday_name', config.birthday_name || defaultConfig.birthday_name],
+        ['birthday_age', config.birthday_age || defaultConfig.birthday_age],
+        ['event_date', config.event_date || defaultConfig.event_date],
+        ['event_time', config.event_time || defaultConfig.event_time],
+        ['event_location', config.event_location || defaultConfig.event_location],
+        ['confirm_deadline', config.confirm_deadline || defaultConfig.confirm_deadline]
+      ]);
+    }
+
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    } else {
+      onConfigChange(defaultConfig);
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c0783470109bc83',t:'MTc2ODgzODA4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
